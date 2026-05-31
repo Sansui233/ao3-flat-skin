@@ -1,9 +1,10 @@
 import { spawn } from "node:child_process";
 import net from "node:net";
+import path from "node:path";
 
 const preferredPort = Number(process.argv[2] || process.env.PORT || 4174);
 const host = "127.0.0.1";
-const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
+const sassCli = path.join(process.cwd(), "node_modules", "sass", "sass.js");
 
 async function isPortAvailable(port) {
   return new Promise((resolve) => {
@@ -37,8 +38,13 @@ if (port !== preferredPort) {
 const tasks = [
   {
     name: "scss",
-    command: pnpmCommand,
-    args: ["run", "scss:watch"],
+    command: process.execPath,
+    args: [
+      sassCli,
+      "--watch",
+      "--no-source-map",
+      "scss/index.scss:src/skins/base.css",
+    ],
   },
   {
     name: "server",
@@ -85,15 +91,28 @@ function stopAll(code = 0) {
 }
 
 for (const task of tasks) {
-  const child = spawn(task.command, task.args, {
-    cwd: process.cwd(),
-    env: process.env,
-    stdio: ["inherit", "pipe", "pipe"],
-  });
+  let child;
+  try {
+    child = spawn(task.command, task.args, {
+      cwd: process.cwd(),
+      env: process.env,
+      stdio: ["ignore", "pipe", "pipe"],
+      windowsHide: true,
+    });
+  } catch (error) {
+    console.error(`[dev] Failed to start ${task.name}: ${error.message}`);
+    stopAll(1);
+    break;
+  }
 
   children.add(child);
   prefixStream(child.stdout, task.name, process.stdout);
   prefixStream(child.stderr, task.name, process.stderr);
+
+  child.on("error", (error) => {
+    console.error(`[dev] ${task.name} failed to start: ${error.message}`);
+    stopAll(1);
+  });
 
   child.on("exit", (code, signal) => {
     children.delete(child);

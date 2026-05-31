@@ -1,17 +1,18 @@
 // Default blue color scheme for the AO3 skin.
 
 :root {
-    --current-color: rgb(18, 52, 255);
-    --current-color-dim: rgb(191, 201, 255);
-    --background-primary: white;
-    --background-current: rgb(229, 233, 255);
-    --background-current-dim: rgb(241, 243, 255);
+    --text-current: hsl(355, 75%, 63%);
+    --current-color: #ec8599;
+    --current-color-dim: #f5c9d2;
+    --border: hsl(353, 78%, 82%);
+    --background-current: rgb(255, 229, 235);
+    --background-current-dim: rgb(255, 245, 246);
     --background-gray-1: rgb(248, 248, 248);
+    --background-primary: white;
     --text-gray: #aeaeae;
     --text-gray-2: #8b8b8b;
     --text-dark: #666;
-    --text-current: rgb(79, 106, 255);
-    --border: rgb(156, 172, 255);
+
     --font-sans: Inter, Helvetica, sans-serif;
     --font-serif: Georgia, serif;
     --font-mono:
