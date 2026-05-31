@@ -1,0 +1,11 @@
+// AO3 skin build entry. Compile this file to `src/skins/base.css`.
+//
+// Theme switch:
+// Keep one theme import active, then run `pnpm run scss:build`
+// or keep `pnpm run dev` running.
+
+@use "theme-blue";
+// @use "theme-red";
+// @use "theme-gray";
+
+@use "base";

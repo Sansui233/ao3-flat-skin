@@ -1,0 +1,20 @@
+{
+  "name": "ao3-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/Home _ Archive of Our Own.html",
+  "scripts": {
+    "serve": "node scripts/live-server.mjs",
+    "scss:build": "sass --no-source-map scss/index.scss src/skins/base.css",
+    "scss:watch": "sass --watch --no-source-map scss/index.scss:src/skins/base.css",
+    "dev": "node scripts/dev.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.14.0",
+  "devDependencies": {
+    "sass": "^1.100.0"
+  }
+}

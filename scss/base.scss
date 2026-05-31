@@ -1,0 +1,948 @@
+// Base AO3 skin rules. Compile `scss/index.scss`; do not compile this file directly.
+
+#proxy-notice {
+    display: none;
+}
+
+/**********/
+/** Font **/
+/**********/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    font-family: var(--font-sans);
+}
+
+input,
+textarea {
+    font-family: var(--font-sans);
+}
+
+#header .heading a span {
+    font-family: var(--font-serif);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+    font-family: var(--font-sans);
+}
+
+/** main **/
+#main {
+    padding-top: 1rem;
+}
+
+#main:not([class^="fandom"]):not([class*=" fandom"]):not(
+        [class="system docs index region"]
+    ) {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.userstuff {
+    line-height: var(--user-line-height);
+    font-family: var(--user-font-family);
+}
+
+#footer {
+    background: var(--current-color);
+    background-image: none;
+    box-shadow: none;
+}
+#footer h4 {
+    font-weight: bold;
+}
+
+/** components **/
+.actions a:visited,
+.action:visited,
+.action a:link,
+.action a:visited {
+    color: var(--text-current-dim);
+}
+
+.actions a,
+.actions a:link,
+.action,
+.action:link,
+.actions button,
+.actions input,
+input[type="submit"],
+button,
+.current,
+.actions label {
+    background: var(--background-current);
+    border-color: var(--border);
+    border-width: 0;
+    color: var(--current-color);
+    transition:
+        background 160ms ease,
+        color 160ms ease;
+}
+
+.actions a:hover,
+.actions button:hover,
+.actions input:hover,
+.actions a:focus,
+.actions button:focus,
+.actions input:focus,
+label.action:hover,
+.action:hover,
+.action:focus {
+    background: var(--current-color);
+    color: var(--background-current);
+    box-shadow: 0 2px 5px 0px var(--current-color-dim);
+}
+
+.actions a:active,
+.current,
+a.current,
+a:link.current,
+.current a:visited {
+    color: var(--background-current);
+    background: var(--current-color);
+    border-color: var(--current-color);
+    box-shadow: 0 2px 5px 0px var(--current-color-dim);
+}
+
+span.question {
+    box-shadow: unset;
+    background: var(--background-current);
+    border: unset;
+    border-radius: 9999px;
+    height: 1.2rem;
+    width: 1.2rem;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 160ms ease;
+}
+span.question:hover {
+    background: var(--current-color);
+    color: var(--background-current);
+    box-shadow: 0 2px 5px 0px var(--current-color-dim);
+}
+span.symbol {
+    color: var(--current-color);
+}
+
+a.tag:hover,
+.listbox .heading a.tag:visited:hover {
+    background: var(--background-current);
+    color: var(--current-color);
+}
+
+/* notice */
+.notice,
+.comment_notice,
+.kudos_notice,
+ul.notes,
+.caution,
+.error,
+.comment_error,
+.kudos_error,
+.alert.flash {
+    box-shadow: none;
+    background: var(--background-current-dim);
+    color: var(--text-dark);
+}
+
+/* main navigation */
+#main ul.navigation.actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    justify-items: flex-end;
+    text-align: right;
+    float: none;
+}
+#main ul.navigation.actions > li {
+    flex: 0 1 0;
+    margin: 0;
+}
+.actions li a,
+.actions li button,
+.actions li input,
+.actions li input[type="submit"],
+.actions li .current,
+.actions li label {
+    margin: 0.1rem auto;
+}
+/* form */
+fieldset {
+    border: unset;
+    border-top: 2px dotted var(--border);
+    box-shadow: unset;
+    background: none;
+    margin: 1rem 0;
+    padding: 0;
+    font-size: 1rem;
+}
+form.verbose legend,
+.verbose form legend {
+    border-radius: 5px;
+    font-size: 1.1rem;
+    border: none;
+    border: 1px solid var(--border);
+    background: var(--background-current-dim);
+    color: var(--text-current-dim);
+    box-shadow: 0 2px 3px 0 var(--background-current);
+}
+form dt {
+    border-bottom: none;
+}
+form dd > ul:not(.autocomplete) > li {
+    margin: 0.25rem 0;
+    display: flex;
+    align-items: center;
+}
+input[type="checkbox"],
+input[type="file"],
+input[type="radio"],
+input.number,
+p input,
+p select,
+.heading select,
+li select {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--current-color);
+    flex-shrink: 0;
+}
+input[type="radio"] {
+    margin: 0;
+}
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+    padding-left: 0.25rem;
+}
+
+/********************/
+/** Header Color **/
+/********************/
+#header {
+    background-color: var(--background-gray-1);
+}
+#header .heading a {
+    color: var(--current-color);
+}
+#header .user a:hover,
+#header .user a:focus {
+    color: var(--current-color);
+}
+#header a {
+    border-radius: 5px;
+}
+#header .dropdown:hover a {
+    background: var(--background-current-dim);
+}
+#header .menu li {
+    background: unset;
+    border-bottom: dashed var(--border) 1px;
+}
+#header .menu,
+#small_login {
+    background: var(--background-current-dim);
+}
+#header .actions a:hover,
+#header .actions a:focus,
+#header .dropdown actions:hover a,
+#header .open a {
+    background-color: var(--background-current);
+    color: var(--current-color);
+}
+#header a,
+#header a:visited,
+#header .primary .open a,
+#header .primary .dropdown:hover a,
+#header .primary .dropdown a:focus {
+    color: var(--current-color);
+}
+
+#header .dropdown .menu a:hover,
+#header .dropdown .menu a:focus {
+    text-decoration: underline;
+}
+
+.actions a,
+.actions a:link,
+.action,
+.action:link,
+.actions button,
+.actions input,
+input[type="submit"],
+button,
+.current,
+.actions label {
+    background-image: none;
+}
+
+/****************/
+/** Header Typography **/
+/****************/
+#header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#header h1.heading {
+    flex-shrink: 0;
+    display: inline-block;
+    min-width: 100px;
+}
+#header > #login {
+    flex: 1 1 0;
+    min-width: 0;
+}
+#header > nav[aria-label="Site"] {
+    flex: 0 0 100%;
+    width: 100%;
+}
+#header nav[aria-label="Site"] .dropdown:hover a.dropdown-toggle,
+#header nav[aria-label="Site"] .open a {
+    border-radius: 5px 5px 0 0;
+    border-bottom: unset;
+}
+#header .menu,
+#small_login {
+    border-radius: 0 0 0.5rem 0.5rem;
+    border-top: unset;
+    box-shadow: none;
+}
+#header ul.dropdown-menu {
+    border: 1px solid var(--border);
+}
+
+#header .heading a {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    height: 1.5em;
+}
+#header .heading img.logo {
+    display: inline-block;
+    height: 1.2rem;
+    object-fit: contain;
+    aspect-ratio: 1;
+    margin-right: 0.2rem;
+    border-radius: 0.2rem;
+    filter: saturate(10000%) hue-rotate(245deg) brightness(100%);
+}
+
+#header .heading,
+#header .primary > li:first-of-type {
+    margin-left: 2px;
+}
+
+#header .user {
+    padding: 0;
+}
+
+#header > nav[aria-label="Site"] > ul.primary {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    min-width: 0;
+    background: var(--current-color);
+    box-shadow: unset;
+    height: 2.125rem;
+}
+
+#header > nav[aria-label="Site"] > ul.primary > li {
+    float: none;
+    flex: 0 0 auto;
+}
+
+#header > nav[aria-label="Site"] > ul.primary > li.search {
+    --search-default: 11rem;
+    --search-min: 7rem;
+    --search-open: 26rem;
+    --search-control-height: 2rem;
+    --search-icon-size: 1.05rem;
+    --search-input-height: 1.375rem;
+
+    margin-left: auto;
+    flex: 0 1 var(--search-default);
+    width: var(--search-default);
+    min-width: var(--search-min);
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+#header .primary > li.search form.search {
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+#header .primary > li.search fieldset,
+#header .primary > li.search p {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+#header .primary > li.search fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#header .primary > li.search p {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.15rem 0.35rem;
+}
+
+#header .primary > li.search input#site_search {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    transition:
+        width 160ms ease,
+        background-color 160ms ease;
+}
+
+#header .primary > li.search:focus-within {
+    z-index: 50;
+}
+#header .primary > li.search:focus-within form.search {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(var(--search-open), calc(100vw - 1rem));
+    max-width: calc(100vw - 1rem);
+    text-align: right;
+}
+input#site_search {
+    border-radius: 3px;
+    font-size: 1rem;
+    background-color: var(--current-color-dim);
+}
+input#site_search:focus,
+input#site_search:hover {
+    background-color: var(--background-primary);
+    box-shadow: none;
+    color: unset;
+}
+
+/** connect search box and button **/
+#header .primary > li.search p {
+    gap: 0;
+}
+#header #search .text {
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: var(--search-input-height);
+}
+#header .primary > li.search span.actions {
+    position: relative;
+    padding: 0;
+
+    width: var(--search-input-height);
+    height: var(--search-input-height);
+    margin: 0;
+    line-height: 0;
+    overflow: visible;
+}
+/* search icon */
+#header .primary > li.search span.actions::after {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.15rem;
+    display: block;
+    width: var(--search-icon-size);
+    height: var(--search-icon-size);
+    background-color: var(--current-color);
+    mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg")
+        center / contain no-repeat;
+    -webkit-mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg")
+        center / contain no-repeat;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+#header .primary > li.search span.actions > input[type="submit"] {
+    border-radius: 0 3px 3px 0;
+    color: var(--current-color);
+    font-size: 0rem;
+    text-indent: 0px;
+    overflow: hidden;
+    background-color: var(--current-color-dim);
+    height: var(--search-input-height);
+    width: var(--search-input-height);
+    border-left: 1px solid var(--current-color);
+    transition: background-color 160ms ease;
+    cursor: pointer;
+}
+#header .primary > li.search span.actions > input[type="submit"]:hover {
+    box-shadow: none;
+    background-color: var(--background-primary);
+}
+input#site_search:hover + .tip + span.submit > input[type="submit"],
+input#site_search:focus + .tip + span.submit > input[type="submit"] {
+    background-color: var(--background-primary);
+}
+
+.search input:focus + [role="tooltip"] {
+    background: var(--background-current);
+    border-color: var(--border);
+    border-radius: 3px;
+    padding: 0.2em 0.5em;
+    height: 0.75rem;
+    left: 1rem;
+    top: calc(var(--search-input-height) + 0.175rem);
+    text-align: left;
+}
+
+/* scroll-driven animation */
+@supports (animation-timeline: scroll()) {
+    #header {
+        position: sticky;
+        top: 0;
+        z-index: 19;
+        animation: hide-heading linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 2rem 5rem;
+    }
+
+    @keyframes hide-heading {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-100%);
+        }
+    }
+}
+
+/** Home **/
+.splash .module > h3 {
+    color: var(--current-color);
+    border-bottom: 1px dotted var(--border);
+    font-weight: 300;
+}
+
+.splash .intro h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    text-align: center;
+    font-weight: 300;
+    font-family: var(--font-serif);
+}
+.splash .intro .stats {
+    margin-top: 2rem;
+}
+.splash .intro .parent {
+    margin-bottom: 2rem;
+}
+.splash .browse {
+    margin-top: 0.5rem;
+}
+.splash .browse li a:before {
+    color: var(--current-color);
+}
+.splash .browse li a {
+    font-size: 0.875rem;
+}
+.splash .browse li {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.splash .module div.account {
+    background: var(--background-current-dim);
+    border: var(--border) 1px solid;
+}
+
+/*****************************/
+/********* Works Show ********/
+/*****************************/
+/** details **/
+.wrapper {
+    margin: 0.75rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px 0px var(--background-current-dim);
+}
+dl.meta {
+    border: 1px solid rgb(124, 124, 124, 0.2);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    padding: 1rem;
+}
+.meta dt,
+.meta dt a {
+    font-family: var(--font-mono);
+    color: var(--text-gray-2);
+}
+dd.tags ul,
+ul.tags li {
+    line-height: 1.5rem;
+}
+ul.tags {
+    font-size: var(--tag-font-size);
+}
+ul.tags li a,
+dd.tags:not(.fandom) a.tag {
+    border-radius: 99px;
+    padding: 0.1rem 0.3rem;
+    background: var(--background-current-dim);
+    border: var(--border) 1px solid;
+    color: var(--text-current-dim);
+    transition:
+        color 160ms ease,
+        background 160ms,
+        ease;
+}
+ul.tags li.warnings a,
+dd.tags.warning a.tag {
+    background: lightyellow;
+    color: #aa7300;
+    border: 1px #d2d272 solid;
+    font-weight: 400;
+}
+ul.tags li.relationships a,
+dd.tags.relationship a.tag {
+    background: #e2f7d3;
+    color: #569615;
+    border: 1px #7fd272 solid;
+    font-weight: 400;
+}
+ul.tags li.freeforms a,
+dd.tags.freeform a.tag {
+    background: #e7e5ff;
+    color: #4b38e2;
+    border: 1px #af92f4 solid;
+    font-weight: 400;
+}
+div.comment,
+li.comment {
+    border: none;
+}
+div.comment fieldset h4.heading {
+    margin-top: 1rem;
+}
+
+/****************/
+/** Search Form **/
+/****************/
+#main.works-search input[type="submit"]:hover {
+    background: var(--current-color);
+    color: var(--background-current);
+    box-shadow: 0 2px 5px 0 var(--current-color-dim);
+    cursor: pointer;
+}
+#main.works-search input[type="submit"][value="Search"] {
+    font-size: 1rem;
+    padding: 0.5rem 2rem 0.5rem 3.5rem;
+    margin: 0;
+    border-radius: 99px;
+}
+#main.works-search .submit {
+    position: relative;
+    padding: 0;
+}
+
+#main.works-search .submit:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    top: 23%;
+    right: 5.8rem;
+    background-color: var(--current-color);
+    mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg")
+        center / contain no-repeat;
+    -webkit-mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg")
+        center / contain no-repeat;
+    pointer-events: none;
+    cursor: pointer;
+}
+#main.works-search .submit:has(input[type="submit"]:hover)::after {
+    background-color: var(--background-current);
+}
+
+/* form layout */
+#main form dl,
+#main form.search[action="/works/search"] dl {
+    display: grid;
+    grid-template-columns: fit-content(10rem) minmax(0, 1fr);
+    gap: 0.75rem 1rem;
+    margin: 1rem 0;
+    padding: 0;
+    clear: none;
+    align-items: center;
+}
+
+#main form dt,
+#main form dd {
+    align-self: center;
+    min-height: 2.25rem;
+    display: flex;
+    align-items: center;
+}
+
+#main form dt,
+#main form.search[action="/works/search"] dt {
+    float: none;
+    clear: none;
+    min-width: 0;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    white-space: nowrap;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+#main form dt label,
+#main form.search[action="/works/search"] dt label {
+    display: inline-block;
+    margin: 0;
+}
+
+#main form dt a.help,
+#main form.search[action="/works/search"] dt a.help {
+    flex: 0 0 auto;
+    margin: 0;
+    line-height: 1;
+}
+
+#main form dd,
+#main form.search[action="/works/search"] dd {
+    float: none;
+    clear: none;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+form.search.verbose > fieldset:first-child {
+    margin-top: 0;
+}
+
+/* form control*/
+#main
+    form
+    :is(
+        input[type="text"],
+        input[type="search"],
+        input[type="number"],
+        textarea,
+        select
+    ),
+#main
+    form.search[action="/works/search"]
+    :is(
+        input[type="text"],
+        input[type="search"],
+        input[type="number"],
+        textarea,
+        select
+    ) {
+    width: 100%;
+    max-width: 100%;
+    min-height: 2.25rem;
+    box-sizing: border-box;
+    margin: 3px;
+    /* focus outline*/
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--current-color-dim);
+    border-radius: 6px;
+    background: var(--background-primary);
+    color: var(--text-primary);
+    font: inherit;
+    box-shadow: none;
+}
+
+#main form :is(input, textarea, select):focus,
+#main form.search[action="/works/search"] :is(input, textarea, select):focus {
+    border-color: var(--current-color);
+    outline: 2px solid color-mix(in srgb, var(--current-color) 22%, transparent);
+    outline-offset: 1px;
+}
+
+/****************/
+/** Search Result **/
+/****************/
+#main > h2.heading,
+#main.people-search > h2.heading,
+#main.bookmark-search > h2.heading,
+#main.tag-search > h2.heading {
+    display: block;
+}
+#main.works-search ul.navigation.actions {
+    float: right;
+}
+#main.works-search > h4.heading {
+    font-size: 1rem;
+    margin: 0.65rem 0 0 0;
+}
+#main.works-search > h3.heading {
+    font-size: 1.2rem;
+    color: var(--current-color);
+    font-family: var(--font-mono);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+ol.work.index.group li.blurb {
+    border: unset;
+    border-top: dashed 1px var(--current-color);
+
+    padding: 1rem 0;
+}
+.blurb h4 a:link,
+.blurb h4 img {
+    color: var(--current-color);
+}
+.blurb .header > h4.heading {
+    font-family: var(--font-mono);
+    color: var(--text-gray);
+}
+.blurb .header > h4.heading a:not([rel~="author"]) {
+    font-weight: 500;
+    font-size: 1.15rem;
+    border-bottom: none;
+}
+.blurb .header > h4.heading a:not([rel~="author"]):hover {
+    background: var(--background-current);
+}
+.blurb .header > h4.heading a[rel~="author"] {
+    border-bottom: none;
+    color: var(--text-current-dim);
+}
+.blurb .header > h4.heading a[rel~="author"]:hover {
+    color: var(--current-color);
+    background: var(--background-current);
+}
+
+.blurb .header > h5.heading > a {
+    font-family: var(--font-mono);
+    color: var(--text-gray-2);
+}
+.blurb .header > h5.heading > a:hover {
+    color: var(--current-color);
+}
+.blurb p.datetime {
+    font-size: 0.875rem;
+}
+
+.blurb blockquote {
+    font-size: 1rem;
+}
+.blurb blockquote p {
+    margin: 0.5rem 0;
+}
+dl.stats {
+    font-size: 0.875rem;
+}
+dl.stats dd,
+dl.stats dt {
+    font-family: var(--font-mono);
+}
+dl.stats dt {
+    color: var(--text-gray);
+}
+/* stats grid */
+dl.stats {
+    display: grid;
+    grid-template-columns: repeat(2, max-content max-content);
+    column-gap: 0.25em;
+    row-gap: 0.2em;
+    align-items: baseline;
+    justify-content: end;
+}
+
+dl.stats dt,
+dl.stats dd {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+dl.stats dd {
+    justify-self: end;
+}
+/* 从第 2 组开始，给每组前面留间距 */
+dl.stats dt:not(:first-of-type) {
+    margin-left: 1em;
+}
+
