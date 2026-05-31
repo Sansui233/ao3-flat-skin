@@ -1,0 +1,3 @@
+[submodule "skins/neos"]
+	path = skins/neos
+	url = https://github.com/ZerafinaCSS/neos
