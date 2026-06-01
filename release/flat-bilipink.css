@@ -1,4 +1,3 @@
-@charset "UTF-8";
 :root {
   --current-color: #f4839a;
   --current-color-dim: #ffd5de;
@@ -37,9 +36,6 @@
   --tag-font-size: 0.875rem;
 }
 
-/* #proxy-notice {
-    display: none;
-} */
 /**********/
 /** Font **/
 /**********/

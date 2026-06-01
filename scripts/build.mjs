@@ -64,6 +64,62 @@ function runSass(outputFile) {
   }
 }
 
+function collectCssVariables(css) {
+  const variables = new Map();
+  const customPropertyPattern = /(^|[{\s;])(--[a-zA-Z0-9_-]+)\s*:\s*([^;{}]+);/g;
+
+  for (const match of css.matchAll(customPropertyPattern)) {
+    variables.set(match[2], match[3].trim());
+  }
+
+  return variables;
+}
+
+function resolveCssValue(value, variables, seen = new Set()) {
+  let didReplace = false;
+  const resolved = value.replace(/var\(\s*(--[a-zA-Z0-9_-]+)\s*(?:,\s*([^()]*))?\)/g, (match, name, fallback) => {
+    if (seen.has(name)) return fallback?.trim() || match;
+
+    const variableValue = variables.get(name);
+    if (!variableValue) return fallback?.trim() || match;
+
+    didReplace = true;
+    seen.add(name);
+    const resolvedVariable = resolveCssValue(variableValue, variables, seen);
+    seen.delete(name);
+    return resolvedVariable;
+  });
+
+  return didReplace && resolved.includes("var(")
+    ? resolveCssValue(resolved, variables, seen)
+    : resolved;
+}
+
+function rewriteFontFamilyVars(outputFile) {
+  const css = fs.readFileSync(outputFile, "utf8");
+  const variables = collectCssVariables(css);
+  let replacements = 0;
+
+  const rewritten = css.replace(
+    /(font-family\s*:\s*)([^;]*var\([^;{}]+\)[^;]*)(;)/g,
+    (match, prefix, value, suffix) => {
+      const resolvedValue = resolveCssValue(value.trim(), variables);
+      if (resolvedValue.includes("var(")) {
+        console.warn(
+          `[build] warning: unresolved font-family variable in ${path.basename(outputFile)}: ${value.trim()}`,
+        );
+        return match;
+      }
+
+      replacements += 1;
+      return `${prefix}${resolvedValue}${suffix}`;
+    },
+  );
+
+  fs.writeFileSync(outputFile, rewritten, "utf8");
+  console.log(`[build] replaced ${replacements} font-family variable(s) in ${path.basename(outputFile)}`);
+}
+
 function rewriteImagesetUrl(outputFile, theme, baseHasImageset) {
   if (!baseHasImageset) {
     console.warn("[build] warning: scss/base.scss does not contain /images/imageset.png");
@@ -125,6 +181,7 @@ try {
 
       writeIndex(theme, language);
       runSass(outputFile);
+      rewriteFontFamilyVars(outputFile);
       rewriteImagesetUrl(outputFile, theme, baseHasImageset);
       console.log(`[build] wrote release/${outputName}`);
     }

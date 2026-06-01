@@ -31,7 +31,7 @@
   --font-serif: Georgia, serif;
   --font-mono: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   --user-line-height: 1.5;
-  --user-font-family: var(--font-serif);
+  --user-font-family: Georgia, serif;
   --user-font-size: 1rem;
   --user-max-width: 600px;
   --tag-font-size: 0.875rem;
@@ -110,7 +110,7 @@ h5,
 h6,
 .heading,
 #header .heading a span {
-  font-family: var(--font-sans);
+  font-family: Inter, Helvetica, sans-serif;
 }
 
 #outer {
@@ -145,7 +145,7 @@ h6,
 
 #main .userstuff {
   line-height: var(--user-line-height);
-  font-family: var(--user-font-family);
+  font-family: Georgia, serif;
   font-size: var(--user-font-size);
   letter-spacing: var(--user-letter-spacing);
 }
@@ -701,7 +701,7 @@ nav#greeting ul.user {
   line-height: 1.2;
   text-align: center;
   font-weight: 300;
-  font-family: var(--font-serif);
+  font-family: Georgia, serif;
 }
 .splash .intro .stats {
   margin-top: 2rem;
@@ -747,7 +747,7 @@ dl.meta {
 
 .meta dt,
 .meta dt a {
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   color: var(--text-gray-2);
 }
 
@@ -946,7 +946,7 @@ select) {
 #main.works-search > h3.heading {
   font-size: 1.2rem;
   color: var(--text-current);
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -964,7 +964,7 @@ ol.work.index.group li.blurb {
   color: var(--text-current);
 }
 .blurb .header > h4.heading {
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   color: var(--text-gray);
 }
 .blurb .header > h4.heading a {
@@ -986,7 +986,7 @@ ol.work.index.group li.blurb {
   font-size: 0.9rem;
 }
 .blurb .header > h5.heading a {
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   color: var(--text-gray-2);
 }
 .blurb .header > h5.heading a:hover {
@@ -1014,14 +1014,14 @@ dl.stats {
 }
 dl.stats dd,
 dl.stats dt {
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   margin: 0;
   padding: 0;
   white-space: nowrap;
 }
 dl.stats dd a,
 dl.stats dt a {
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
 }
 dl.stats dt {
   color: var(--text-gray);
@@ -1084,12 +1084,12 @@ dl.stats dt:not(:first-of-type) {
 
 .reading h4.viewed {
   font-size: 1rem;
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   color: var(--text-dark);
   background-color: var(--background-gray-1);
 }
 .reading h4.viewed span {
-  font-family: var(--font-mono);
+  font-family: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
 }
 
 /*** admin post **/
