@@ -29,8 +29,7 @@
   --tag-freeforms-border-color: #af92f4;
   --font-sans: Inter, Helvetica, sans-serif;
   --font-serif: Georgia, serif;
-  --font-mono: Consolas, SFMono-Regular, Menlo, Monaco, "Liberation Mono",
-      "Courier New", ui-monospace, monospace;
+  --font-mono: Consolas, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, ui-monospace, monospace;
   --user-line-height: 1.5;
   --user-font-family: var(--font-serif);
   --user-font-size: 1rem;
