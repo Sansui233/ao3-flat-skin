@@ -80,21 +80,41 @@ h6,
 #outer {
     margin: 0;
 }
+#tos_prompt {
+    .heading {
+        background: var(--current-color);
+    }
+    [disabled] {
+        background-color: var(--background-current-dim);
+    }
+    button {
+        cursor: pointer;
+        color: var(--text-current-dim);
+    }
+}
 /** main **/
 #main {
+    font-size: 1rem;
     padding-top: 1rem;
 
     &:not([class^="fandom"]):not([class*=" fandom"]):not(
             [class="system docs index region"]
-        ) {
-        max-width: 800px;
+        ):not([class*=" dashboard region"]) {
+        max-width: 768px;
         margin: 0 auto;
     }
+}
+
+#workskin {
+    max-width: var(--user-max-width);
+    margin: auto;
 }
 
 #main .userstuff {
     line-height: var(--user-line-height);
     font-family: var(--user-font-family);
+    font-size: var(--user-font-size);
+    letter-spacing: var(--user-letter-spacing);
 }
 
 #footer {
@@ -107,7 +127,36 @@ h6,
     }
 }
 
+.secondary,
+.work.navigation .download,
+.javascript .work.navigation .download .secondary {
+    box-shadow: 2px 2px 5px var(--background-current);
+    border: 1px solid var(--border-gray);
+    border-radius: 5px;
+    padding: 0.2rem;
+}
+
+#main
+    .secondary
+    form
+    :is(
+        input[type="text"],
+        input[type="search"],
+        input[type="number"],
+        textarea,
+        select
+    ) {
+    width: unset;
+}
+
 /** components **/
+
+// a :visited
+/* a,
+a:link,
+a:visited:hover {
+    color: var(--text-primary); // 会覆盖白字的按钮
+} */
 
 // action visited
 .actions a:visited,
@@ -126,8 +175,7 @@ h6,
 .actions input,
 input[type="submit"],
 button,
-.current,
-.actions label {
+.current {
     background: var(--background-current);
     border-color: var(--border);
     border-width: 0;
@@ -135,6 +183,11 @@ button,
     transition:
         background 160ms ease,
         color 160ms ease;
+}
+.actions label {
+    font-size: 0.875rem;
+    background: none;
+    border: none;
 }
 
 // action hover and focus
@@ -150,6 +203,19 @@ label.action:hover,
     background: var(--current-color);
     color: var(--background-current);
     box-shadow: 0 2px 5px 0px var(--current-color-dim);
+}
+
+.actions a:hover,
+.actions button:hover,
+.actions input:hover,
+.actions a:focus,
+.actions button:focus,
+.actions input:focus,
+label.action:hover,
+.action:hover,
+.action:focus {
+    border: none;
+    cursor: pointer;
 }
 
 // action hover current
@@ -183,9 +249,9 @@ span.question {
     background: var(--background-current);
     border: unset;
     border-radius: 9999px;
-    height: 1.2rem;
-    width: 1.2rem;
-    font-size: 0.875rem;
+    height: 1.2em;
+    width: 1.2em;
+    font-size: 0.875em;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -204,7 +270,7 @@ span.symbol {
 
 a.tag:hover,
 .listbox .heading a.tag:visited:hover {
-    background: var(--background-current);
+    background: var(--background-current-dim);
     color: var(--text-current);
 }
 
@@ -227,26 +293,82 @@ ul.notes,
 /* main navigation */
 #main {
     ul.navigation.actions {
+        font-size: 0.875rem;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
         justify-items: flex-end;
+        align-items: center;
         text-align: right;
         float: none;
-    }
-    ul.navigation.actions > li {
-        flex: 0 1 0;
-        margin: 0;
+        & > li {
+            flex: 0 1 0;
+            margin: 0;
+        }
+        & > li:not([class="mark"]):not([class="subscribe"]):has(> form) {
+            flex: 1 1 0;
+            .landmark {
+                display: none;
+            }
+            form > p {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                padding-left: 100px;
+                justify-content: flex-end;
+            }
+            p {
+                padding: 0;
+                margin: 0;
+            }
+            p > * {
+                flex: 0 1 0;
+            }
+            :is(
+                input[type="text"],
+                input[type="search"],
+                input[type="number"],
+                textarea
+            ) {
+                font-size: 1rem;
+                width: unset;
+                min-width: 5rem;
+                max-width: 7rem;
+                min-height: 1.8rem;
+                padding: 0 0.25rem;
+            }
+            select {
+                min-height: 1.8rem;
+                padding: 0 1rem 0 0.25rem;
+                width: unset;
+                min-width: 5rem;
+                max-width: 7rem;
+            }
+        }
     }
 }
-.actions li a,
-.actions li button,
-.actions li input,
-.actions li input[type="submit"],
-.actions li .current,
-.actions li label {
-    margin: 0.1rem auto;
+
+.actions {
+    li input,
+    li .current,
+    li label {
+        margin: 0.1rem 0.25rem;
+    }
+
+    li a,
+    li button,
+    // mark for later
+    input[type="submit"],
+    // subscribe
+    li input[type="submit"] {
+        margin: 0.1rem 0;
+    }
+
+    li label {
+        padding-right: 0;
+    }
 }
+
 /* form */
 fieldset {
     border: unset;
@@ -291,12 +413,14 @@ li select {
     accent-color: var(--text-current);
     flex-shrink: 0;
 }
-input[type="radio"] {
+
+input[type="radio"],
+input[type="checkbox"] {
     margin: 0;
 }
 input[type="radio"] + label,
 input[type="checkbox"] + label {
-    padding-left: 0.25rem;
+    padding-left: 1rem;
 }
 
 /********************/
@@ -489,7 +613,9 @@ input[type="checkbox"] + label {
                         }
                     }
                     input#site_search {
-                        border-radius: 3px;
+                        border-radius: 3px 0 0 3px;
+                        margin-right: 0;
+                        height: var(--search-input-height);
                         font-size: 1rem;
                         background-color: var(--current-color-dim);
                         &:focus,
@@ -497,6 +623,9 @@ input[type="checkbox"] + label {
                             background-color: var(--background-primary);
                             box-shadow: none;
                             color: unset;
+                            & + .tip + span.submit > input[type="submit"] {
+                                background-color: var(--background-primary);
+                            }
                         }
                     }
                 }
@@ -506,12 +635,6 @@ input[type="checkbox"] + label {
 }
 
 /** connect search box and button **/
-#header #search .text {
-    margin-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    height: var(--search-input-height);
-}
 
 #header .primary {
     & > li.search span.actions {
@@ -544,7 +667,7 @@ input[type="checkbox"] + label {
 
         & > input[type="submit"] {
             border-radius: 0 3px 3px 0;
-            color: var(--current-color);
+            color: var(--text-current);
             font-size: 0rem;
             text-indent: 0px;
             overflow: hidden;
@@ -563,13 +686,6 @@ input[type="checkbox"] + label {
     }
 }
 
-input#site_search:hover,
-input#site_search:focus {
-    & + .tip + span.submit > input[type="submit"] {
-        background-color: var(--background-primary);
-    }
-}
-
 .search input:focus + [role="tooltip"] {
     background: var(--background-current);
     border-color: var(--border);
@@ -579,27 +695,6 @@ input#site_search:focus {
     left: 1rem;
     top: calc(var(--search-input-height) + 0.175rem);
     text-align: left;
-}
-
-/* scroll-driven animation */
-@supports (animation-timeline: scroll()) {
-    #header {
-        position: sticky;
-        top: 0;
-        z-index: 19;
-        animation: hide-heading linear both;
-        animation-timeline: scroll(root block);
-        animation-range: 2rem 5rem;
-    }
-
-    @keyframes hide-heading {
-        from {
-            transform: translateY(0);
-        }
-        to {
-            transform: translateY(-100%);
-        }
-    }
 }
 
 /** Home **/
@@ -651,10 +746,10 @@ input#site_search:focus {
 .wrapper {
     margin: 0.75rem 0;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 5px 0px var(--background-current-dim);
+    box-shadow: 0 2px 5px 0px var(--background-current);
 }
 dl.meta {
-    border: 1px solid rgb(124, 124, 124, 0.2);
+    border: 1px solid var(--border-gray);
     border-radius: 0.5rem;
     font-size: 0.875rem;
     padding: 1rem;
@@ -666,7 +761,7 @@ dl.meta {
 }
 dd.tags ul,
 ul.tags li {
-    line-height: 1.5rem;
+    line-height: 1.7;
 }
 ul.tags {
     font-size: var(--tag-font-size);
@@ -674,7 +769,7 @@ ul.tags {
 ul.tags li a,
 dd.tags:not(.fandom) a.tag {
     border-radius: 99px;
-    padding: 0.1rem 0.3rem;
+    padding: 0.1rem 0.5rem;
     background: var(--background-current-dim);
     border: var(--border) 1px solid;
     color: var(--text-current);
@@ -683,25 +778,29 @@ dd.tags:not(.fandom) a.tag {
         background 160ms,
         ease;
 }
+ul.tags li a:hover,
+dd.tags:not(.fandom) a.tag:hover {
+    filter: brightness(0.9) saturate(1.1) contrast(1.15);
+}
 ul.tags li.warnings a,
 dd.tags.warning a.tag {
-    background: lightyellow;
-    color: #aa7300;
-    border: 1px #d2d272 solid;
+    background: var(--tag-warning-bg-color);
+    color: var(--tag-warning-text-color);
+    border: 1px var(--tag-warning-border-color) solid;
     font-weight: 400;
 }
 ul.tags li.relationships a,
 dd.tags.relationship a.tag {
-    background: #e2f7d3;
-    color: #569615;
-    border: 1px #7fd272 solid;
+    background: var(--tag-relationship-bg-color);
+    color: var(--tag-relationship-text-color);
+    border: 1px var(--tag-relationship-border-color) solid;
     font-weight: 400;
 }
 ul.tags li.freeforms a,
 dd.tags.freeform a.tag {
-    background: #e7e5ff;
-    color: #4b38e2;
-    border: 1px #af92f4 solid;
+    background: var(--tag-freeforms-bg-color);
+    color: var(--tag-freeforms-text-color);
+    border: 1px var(--tag-freeforms-border-color) solid;
     font-weight: 400;
 }
 div.comment,
@@ -809,19 +908,13 @@ div.comment fieldset h4.heading {
         margin: 0;
         padding: 0;
         min-width: 0;
+        gap: 0.25rem;
     }
     &.search.verbose > fieldset:first-child {
         margin-top: 0;
     }
 
     /* form control*/
-    :is(
-        input[type="text"],
-        input[type="search"],
-        input[type="number"],
-        textarea,
-        select
-    ),
     :is(
         input[type="text"],
         input[type="search"],
@@ -836,7 +929,7 @@ div.comment fieldset h4.heading {
         margin: 3px;
         /* focus outline*/
         padding: 0.45rem 0.65rem;
-        border: 1px solid var(--current-color-dim);
+        border: 1px solid var(--border);
         border-radius: 6px;
         background: var(--background-primary);
         color: var(--text-primary);
@@ -896,24 +989,24 @@ ol.work.index.group li.blurb {
         & > h4.heading {
             font-family: var(--font-mono);
             color: var(--text-gray);
-            a:not([rel~="author"]) {
+            a {
                 font-weight: 500;
                 font-size: 1.15rem;
                 border-bottom: none;
             }
-            a:not([rel~="author"]):hover {
+            a:hover {
                 background: var(--background-current);
             }
             a[rel~="author"] {
-                border-bottom: none;
                 color: var(--text-current);
-                &::hover {
+                &:hover {
                     color: var(--current-color);
                     background: var(--background-current);
                 }
             }
         }
         & > h5.heading {
+            font-size: 0.9rem;
             a {
                 font-family: var(--font-mono);
                 color: var(--text-gray-2);
@@ -950,6 +1043,9 @@ dl.stats {
         margin: 0;
         padding: 0;
         white-space: nowrap;
+        a {
+            font-family: var(--font-mono);
+        }
     }
     dt {
         color: var(--text-gray);
@@ -960,5 +1056,221 @@ dl.stats {
     /* 从第 2 组开始，给每组前面留间距 */
     dt:not(:first-of-type) {
         margin-left: 1em;
+    }
+}
+
+/****************************
+****** Dashboard  News ******
+****************************/
+
+#dashboard,
+#dashboard.own {
+    border: none;
+    border-left: 5px solid var(--border);
+    border-radius: 0;
+    font-size: 0.875rem;
+    /* background: var(--background-current-dim); */
+    padding: 0rem 1rem;
+    a,
+    span {
+        color: var(--text-dark);
+        line-height: 1.5;
+        margin: 0 0.2rem;
+        padding: 0.5rem 0;
+        border-bottom: 2px dotted var(--border);
+        border-radius: 0;
+
+        &:hover {
+            background: none;
+            color: var(--text-current);
+        }
+    }
+    span.current {
+        color: var(--text-current);
+        border-bottom: 2px solid var(--border);
+    }
+}
+
+#dashboard .current {
+    background: unset;
+    color: var(--text-current);
+}
+
+#dashboard ul {
+    border: none;
+    padding: unset;
+}
+
+.reading h4.viewed {
+    font-size: 1rem;
+    font-family: var(--font-mono);
+    color: var(--text-dark);
+    background-color: var(--background-gray-1);
+
+    span {
+        font-family: var(--font-mono);
+    }
+}
+
+/*** admin post **/
+
+#main.admin_posts-index ul.navigation.actions {
+    flex-direction: column;
+    justify-items: flex-end;
+    align-items: flex-end;
+}
+
+.home .header h2 {
+    font-weight: 300;
+}
+
+.admin .primary .icon {
+    --sprite-scale: 1;
+    /* background: url(/images/imageset.png) 100px -75px; */
+    --sprite-width: 200px;
+    --sprite-height: 835px;
+    width: calc(100px * var(--sprite-scale));
+    height: calc(100px * var(--sprite-scale));
+    background-image: url(/images/imageset.png);
+    /* background-repeat: no-repeat; */
+    background-size: calc(var(--sprite-width) * var(--sprite-scale))
+        calc(var(--sprite-height) * var(--sprite-scale));
+    background-position: calc(100px * var(--sprite-scale))
+        calc(-75px * var(--sprite-scale));
+    border-radius: 1rem;
+}
+
+a.rss span {
+    position: relative;
+    background: none;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+}
+a.rss span::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 0.25em;
+    background: url(/images/imageset.png) no-repeat -150px -275px;
+    position: relative;
+    top: 1px;
+}
+.admin .header h3 {
+    line-height: 1.5;
+}
+
+/***********************/
+/******** Fandom *******/
+/***********************/
+
+ul.alphabet.actions {
+    max-height: 12rem;
+    overflow: auto;
+}
+
+// outter box
+.listbox,
+fieldset fieldset.listbox {
+    border-radius: 5px;
+    background: var(--background-gray-1);
+    border-width: 1px;
+}
+
+/* .alphabet .listbox li,
+.media .listbox {
+    margin-right: 0 em;
+} */
+
+//inner box
+.listbox .index {
+    box-shadow: none;
+    border-top: 1px solid var(--border-gray);
+}
+
+.listbox > .heading {
+    display: block;
+    padding-left: 0.625rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 500;
+    .action {
+        float: right;
+    }
+    a,
+    a:link {
+        border: none;
+    }
+}
+
+// layout
+/* ol.fandom ul.tags {
+    columns: 2 24rem;
+    column-gap: 1rem;
+    padding-left: 1.5rem;
+    li {
+        break-inside: avoid;
+        -webkit-column-break-inside: avoid;
+        margin: 0 0 1rem;
+    }
+} */
+
+// typography
+ol.fandom ul.tags li {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    a {
+        border: unset;
+        border-radius: unset;
+        background-color: unset;
+        line-height: 1.25;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// button
+ul.fandom.media {
+    p.actions {
+        a {
+            font-size: 0.875rem;
+            overflow: hidden;
+            background-color: var(--background-gray-2);
+            color: var(--text-dark);
+        }
+        a:hover {
+            background-color: var(--current-color);
+            color: var(--background-current);
+        }
+    }
+    a.tag:hover {
+        background-color: unset;
+        color: var(--text-black);
+        box-shadow: inset 0 -0.5em 0 var(--background-current);
+    }
+}
+
+/** user stuff **/
+div.preface {
+    width: 80%;
+    margin: 1.5em auto;
+
+    h3 {
+        margin-top: 1em;
+    }
+}
+
+#feedback {
+    ul.actions {
+        text-align: right;
+    }
+    a,
+    input[type="submit"],
+    button {
+        font-size: 0.875rem;
     }
 }

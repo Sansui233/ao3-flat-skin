@@ -68,9 +68,92 @@ function sendReload() {
   }
 }
 
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, (char) => {
+    switch (char) {
+      case "&":
+        return "&amp;";
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case '"':
+        return "&quot;";
+      case "'":
+        return "&#39;";
+      default:
+        return char;
+    }
+  });
+}
+
+function pageTitleFromFilename(filename) {
+  return filename.replace(/ _ Archive of Our Own\.html$/u, "").replace(/\.html$/u, "");
+}
+
+function serveIndex(res) {
+  fs.readdir(root, { withFileTypes: true }, (readError, entries) => {
+    if (readError) {
+      res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
+      res.end("Failed to read src directory");
+      return;
+    }
+
+    const htmlFiles = entries
+      .filter((entry) => entry.isFile() && entry.name.endsWith(".html"))
+      .map((entry) => entry.name)
+      .sort((a, b) => a.localeCompare(b, "en"));
+
+    const links = htmlFiles
+      .map((filename) => {
+        const href = `/${encodeURIComponent(filename)}`;
+        const title = escapeHtml(pageTitleFromFilename(filename));
+        return `<li><a href="${href}">${title}</a><code>${escapeHtml(filename)}</code></li>`;
+      })
+      .join("\n");
+
+    const body = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AO3 Theme Preview</title>
+  <link rel="stylesheet" href="/skins/base.css">
+  <style>
+    body { margin: 0; background: var(--background-primary, #fff); }
+    main { max-width: 960px; margin: 0 auto; padding: 3rem 1.25rem; }
+    h1 { margin: 0 0 0.75rem; color: var(--current-color, #1234ff); }
+    p { margin: 0 0 2rem; color: var(--text-dark, #666); }
+    ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+    li { display: grid; gap: 0.35rem; padding: 1rem; border: 1px solid var(--border, #d8defa); border-radius: 0.75rem; background: var(--background-current-dim, #f6f7ff); }
+    a { color: var(--current-color, #1234ff); font-weight: 700; text-decoration: none; overflow-wrap: anywhere; }
+    a:hover, a:focus { text-decoration: underline; }
+    code { color: var(--text-gray-2, #777); font-size: 0.8rem; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>AO3 Theme Preview</h1>
+    <p>Available local HTML pages served from <code>src</code>.</p>
+    <ul>
+${links}
+    </ul>
+  </main>
+${reloadSnippet}
+</body>
+</html>`;
+
+    res.writeHead(200, {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store",
+    });
+    res.end(body);
+  });
+}
+
 function resolveRequestPath(urlPath) {
   const decoded = decodeURIComponent(urlPath.split("?")[0]);
-  const relative = decoded === "/" ? "/Home _ Archive of Our Own.html" : decoded;
+  const relative = decoded;
   const absolute = path.resolve(root, "." + relative);
   if (!absolute.startsWith(root)) return null;
   return absolute;
@@ -124,6 +207,8 @@ function serveFile(req, res) {
 }
 
 const server = http.createServer((req, res) => {
+  const urlPath = (req.url || "/").split("?")[0];
+
   if (req.url === "/__live-reload") {
     res.writeHead(200, {
       "Content-Type": "text/event-stream",
@@ -142,6 +227,11 @@ const server = http.createServer((req, res) => {
       "Cache-Control": "no-store",
     });
     res.end(JSON.stringify({ version: liveVersion }));
+    return;
+  }
+
+  if (urlPath === "/") {
+    serveIndex(res);
     return;
   }
 
@@ -166,5 +256,5 @@ fs.watchFile(skinFile, { interval: 500 }, (current, previous) => {
 
 server.listen(port, "127.0.0.1", () => {
   console.log(`AO3 theme live server: http://127.0.0.1:${port}/`);
-  console.log(`Default page: http://127.0.0.1:${port}/Home%20_%20Archive%20of%20Our%20Own.html`);
+  console.log(`Page index: http://127.0.0.1:${port}/`);
 });

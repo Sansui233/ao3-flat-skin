@@ -6,19 +6,36 @@
     --background-primary: white;
     --background-current: rgb(229, 233, 255);
     --background-current-dim: rgb(241, 243, 255);
-    --background-gray-1: rgb(248, 248, 248);
+    --background-gray-1: #f1f1f1;
+    --background-gray-2: #ebebeb;
+    --border: rgb(156, 172, 255);
+    --border-gray: rgba(124, 124, 124, 0.25);
     --text-gray: #aeaeae;
     --text-gray-2: #8b8b8b;
     --text-dark: #666;
+    --text-primary: #181818;
+    --text-black: #000;
     --text-current: rgb(79, 106, 255);
-    --border: rgb(156, 172, 255);
+    --text-current-dim: rgb(99, 122, 255);
+
+    --tag-warning-bg-color: lightyellow;
+    --tag-warning-text-color: #aa7300;
+    --tag-warning-border-color: #d2d272;
+    --tag-relationship-bg-color: #e2f7d3;
+    --tag-relationship-text-color: #569615;
+    --tag-relationship-border-color: #7fd272;
+    --tag-freeforms-bg-color: #e7e5ff;
+    --tag-freeforms-text-color: #4b38e2;
+    --tag-freeforms-border-color: #af92f4;
+    
     --font-sans: Inter, Helvetica, sans-serif;
     --font-serif: Georgia, serif;
-    --font-mono:
-        Consolas, SFMono-Regular, Menlo, Monaco, "Liberation Mono",
+    --font-mono: Consolas, SFMono-Regular, Menlo, Monaco, "Liberation Mono",
         "Courier New", ui-monospace, monospace;
-    --tag-font-size: 0.875rem;
-
+        
     --user-line-height: 1.5;
     --user-font-family: var(--font-serif);
+    --user-font-size: 1rem;
+    --user-max-width: 600px;
+    --tag-font-size: 0.875rem;
 }

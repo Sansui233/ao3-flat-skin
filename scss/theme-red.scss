@@ -1,25 +1,44 @@
 // Default blue color scheme for the AO3 skin.
 
 :root {
-    --text-current: hsl(355, 75%, 63%);
-    --current-color: #ec8599;
-    --current-color-dim: #f5c9d2;
-    --border: hsl(353, 78%, 82%);
+    --current-color: #f4839a;
+    --current-color-dim: #ffd5de;
     --background-current: rgb(255, 229, 235);
     --background-current-dim: rgb(255, 245, 246);
-    --background-gray-1: rgb(248, 248, 248);
+    --background-gray-1: #f1f1f1;
+    --background-gray-2: #ebebeb;
     --background-primary: white;
+    --border: hsl(353, 78%, 82%);
+    --border-gray: #7c7c7c40;
     --text-gray: #aeaeae;
     --text-gray-2: #8b8b8b;
     --text-dark: #666;
+    --text-primary: #404040;
+    --text-black: #252525;
+    --text-current: hsl(355, 75%, 63%);
+    --text-current-dim: hsl(355, 83%, 68%);
+
+    --tag-warning-bg-color: lightyellow;
+    --tag-warning-text-color: #aa7300;
+    --tag-warning-border-color: #d2d272;
+    // --tag-relationship-bg-color: #effbff;
+    // --tag-relationship-text-color: #0fb0e5;
+    // --tag-relationship-border-color: #7cdeff;
+    --tag-relationship-bg-color: #ebfdde;
+    --tag-relationship-text-color: #5ea518;
+    --tag-relationship-border-color: #91e584;
+    --tag-freeforms-bg-color: #f8f8f8;
+    --tag-freeforms-text-color: #888;
+    --tag-freeforms-border-color: #c4c4c4;
 
     --font-sans: Inter, Helvetica, sans-serif;
     --font-serif: Georgia, serif;
-    --font-mono:
-        Consolas, SFMono-Regular, Menlo, Monaco, "Liberation Mono",
+    --font-mono: Consolas, SFMono-Regular, Menlo, Monaco, "Liberation Mono",
         "Courier New", ui-monospace, monospace;
-    --tag-font-size: 0.875rem;
-
+        
     --user-line-height: 1.5;
     --user-font-family: var(--font-serif);
+    --user-font-size: 1rem;
+    --user-max-width: 600px;
+    --tag-font-size: 0.875rem;
 }
