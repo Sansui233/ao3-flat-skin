@@ -1,13 +1,14 @@
 # AO3 Flat Skin
 
-A skin for archive of our own. Still in developement(form not patched yet). Put here to test resources in real environment.
+A sans serif font skin for archive of our own. Still in developement(form not patched yet). Put here to test resources in real environment.
 
 ![](./docs/images/cover.png)
 
 **Feature**:
-- Icon replace
-- Responsive design with only one file setup.
+- Icon replacement.
+- Responsive design in one file.
 - Patch typography for zh/kr/jp reading.
+- Multi color styles.
 
 ## Install
 
@@ -27,4 +28,6 @@ TODO
 - [Feather icon](https://feathericons.com/)
 - [Materia design icon](https://cdn.jsdelivr.net/npm/material-design-icons@3.0.1/social/2x_web/)
 
-## License GPL 3.0
+## License
+
+GPL 3.0
