@@ -2,3 +2,4 @@ node_modules/
 ./skins
 temp
 docs/agent
+*.psd

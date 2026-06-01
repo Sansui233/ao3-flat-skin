@@ -16,6 +16,8 @@
   --text-black: #000;
   --text-current: rgb(79, 106, 255);
   --text-current-dim: rgb(99, 122, 255);
+  --icon-filter: brightness(0) saturate(100%) invert(77%) sepia(16%) saturate(0%) hue-rotate(238deg) brightness(93%) contrast(83%);
+  --icon-filter-hover: brightness(0) saturate(100%) invert(50%) sepia(20%) saturate(100) hue-rotate(207deg) brightness(88%) contrast(130%);
   --tag-warning-bg-color: lightyellow;
   --tag-warning-text-color: #aa7300;
   --tag-warning-border-color: #d2d272;
@@ -528,6 +530,7 @@ input[type=checkbox] + label {
   aspect-ratio: 1;
   margin-right: 0.2rem;
   border-radius: 0.2rem;
+  filter: var(--icon-filter);
 }
 #header .heading,
 #header .primary > li:first-of-type {
@@ -621,6 +624,17 @@ input[type=checkbox] + label {
 }
 #header nav[aria-label=Site] > ul.primary > li.search input#site_search:focus + .tip + span.submit > input[type=submit], #header nav[aria-label=Site] > ul.primary > li.search input#site_search:hover + .tip + span.submit > input[type=submit] {
   background-color: var(--background-primary);
+}
+
+nav#greeting {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row-reverse;
+}
+nav#greeting ul.user {
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 /** connect search box and button **/
@@ -724,6 +738,7 @@ input[type=checkbox] + label {
   box-shadow: 0 2px 5px 0px var(--background-current);
 }
 
+/** article metadata **/
 dl.meta {
   border: 1px solid var(--border-gray);
   border-radius: 0.5rem;
@@ -748,8 +763,10 @@ ul.tags {
 
 ul.tags li a,
 dd.tags:not(.fandom) a.tag {
+  display: inline-block;
   border-radius: 99px;
   padding: 0.1rem 0.5rem;
+  margin: 0.1rem;
   background: var(--background-current-dim);
   border: var(--border) 1px solid;
   color: var(--text-current);
@@ -794,9 +811,9 @@ div.comment fieldset h4.heading {
   margin-top: 1rem;
 }
 
-/****************/
+/*****************/
 /** Search Form **/
-/****************/
+/*****************/
 #main.works-search input[type=submit]:hover {
   background: var(--current-color);
   color: var(--background-current);
@@ -1220,4 +1237,78 @@ div.preface h3 {
 #feedback input[type=submit],
 #feedback button {
   font-size: 0.875rem;
+}
+
+/***** Icon Replace*******/
+#greeting p.icon {
+  display: none;
+}
+
+/*>>========== replace user actions buttons with icons ==========<<*/
+/* user icon (replaces the "Hi, [username]!") */
+#header #greeting .dropdown > a[href*="/users/"] {
+  content: url("https://cdn.jsdelivr.net/npm/feather-icons@4.29.2/dist/icons/user.svg");
+}
+
+/* "Post" icon */
+#header #greeting .dropdown > a[href*="/works/new"] {
+  content: url("https://cdn.jsdelivr.net/npm/feather-icons@4.29.2/dist/icons/plus.svg");
+}
+
+/* "Log Out" icon */
+#header #greeting a[href*="/users/logout"] {
+  content: url("https://cdn.jsdelivr.net/npm/feather-icons@4.29.2/dist/icons/log-out.svg");
+}
+
+/* settings for the icons */
+#header #greeting > ul > li > a {
+  display: inline-block;
+  height: 1.125rem;
+  padding-block: 10px; /* change icon size here */
+  background: transparent;
+  filter: var(--icon-filter);
+  padding: 0;
+}
+
+/* colors for header icons when hovered/focused */
+#header #greeting > ul > li:is(.open, :hover, :focus) > a,
+#header #greeting > ul > li > a:is(:hover, :focus) {
+  filter: var(--icon-filter-hover);
+}
+
+/* gap between icons (works because of "display: flex" above) */
+#header > nav .user {
+  column-gap: 0.5em;
+}
+
+/*>>========== comment user icon ==========<<*/
+/* default user icon */
+img[src$="/images/skins/iconsets/default/icon_user.png"] {
+  box-sizing: border-box;
+  border: var(--border-width) solid var(--icon-border2); /* border width and color */
+  background: var(--icon-id) content-box;
+  content: url("https://cdn.jsdelivr.net/npm/material-design-icons@3.0.1/action/2x_web/ic_account_circle_white_48dp.png"); /* url of new icon */
+}
+
+/* anon comment icon */
+.comment .icon .anonymous {
+  box-sizing: border-box;
+  border: var(--border-width) solid var(--icon-border1); /* border width and color */
+  background: url("https://cdn.jsdelivr.net/npm/material-design-icons@3.0.1/action/2x_web/ic_help_white_48dp.png"), var(--icon-anon) border-box;
+  background-size: cover;
+}
+
+/* guest comment icon */
+.comment .icon .visitor {
+  box-sizing: border-box;
+  border: var(--border-width) solid var(--icon-border1); /* border width and color */
+  background: url("https://cdn.jsdelivr.net/npm/material-design-icons@3.0.1/social/2x_web/ic_person_white_48dp.png"), var(--icon-anon) border-box;
+  background-size: cover;
+}
+
+/* default collection icon */
+img[src$="/images/skins/iconsets/default/icon_collection.png"] {
+  border: var(--border-width) solid var(--icon-border1); /* border width and color */
+  background: var(--icon-coll) border-box;
+  content: url("https://cdn.jsdelivr.net/npm/material-design-icons@3.0.1/image/2x_web/ic_collections_white_48dp.png"); /* url of new icon */
 }

@@ -17,6 +17,8 @@
     --text-black: #252525;
     --text-current: hsl(355, 75%, 63%);
     --text-current-dim: hsl(355, 83%, 68%);
+    --icon-filter: brightness(0) saturate(100%) invert(60%) sepia(20%) saturate(999%) hue-rotate(299deg) brightness(90%) contrast(120%);
+    --icon-filter-hover: brightness(0) saturate(100%) invert(80%) sepia(24%) saturate(1544%) hue-rotate(299deg) brightness(108%) contrast(120%);
 
     --tag-warning-bg-color: lightyellow;
     --tag-warning-text-color: #aa7300;
