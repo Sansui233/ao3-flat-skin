@@ -319,7 +319,6 @@ ul.notes,
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  justify-items: flex-end;
   align-items: center;
   text-align: right;
   float: none;
@@ -391,6 +390,7 @@ fieldset {
   margin: 1rem 0;
   padding: 0;
   font-size: 1rem;
+  position: relative;
 }
 
 form.verbose legend,
@@ -531,8 +531,7 @@ input[type=checkbox] + label {
 #header .heading img.logo {
   display: inline-block;
   height: 1.2rem;
-  object-fit: contain;
-  aspect-ratio: 1;
+  width: auto;
   margin-right: 0.2rem;
   border-radius: 0.2rem;
   filter: var(--icon-filter);
@@ -594,7 +593,6 @@ input[type=checkbox] + label {
   align-items: center;
   margin: 0;
   padding: 0.15rem 0.35rem;
-  gap: 0;
 }
 #header nav[aria-label=Site] > ul.primary > li.search input#site_search {
   flex: 1 1 auto;
@@ -611,8 +609,7 @@ input[type=checkbox] + label {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: min(var(--search-open), 100vw - 1rem);
-  max-width: calc(100vw - 1rem);
+  width: var(--search-open);
   text-align: right;
 }
 #header nav[aria-label=Site] > ul.primary > li.search input#site_search {
@@ -653,7 +650,7 @@ nav#greeting ul.user {
   overflow: visible;
   /* search icon */
 }
-#header .primary > li.search span.actions::after {
+#header .primary > li.search span.actions::before {
   content: "";
   position: absolute;
   left: 0.15rem;
@@ -661,11 +658,11 @@ nav#greeting ul.user {
   display: block;
   width: var(--search-icon-size);
   height: var(--search-icon-size);
-  background-color: var(--current-color);
-  mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg") center/contain no-repeat;
-  -webkit-mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg") center/contain no-repeat;
-  pointer-events: none;
+  background-image: url("https://cdn.jsdelivr.net/npm/feather-icons@4.29.2/dist/icons/search.svg");
+  background-size: 1.1rem 1.1rem;
   cursor: pointer;
+  z-index: 1;
+  filter: var(--icon-filter);
 }
 #header .primary > li.search span.actions > input[type=submit] {
   border-radius: 0 3px 3px 0;
@@ -678,6 +675,10 @@ nav#greeting ul.user {
   width: var(--search-input-height);
   border-left: 1px solid var(--current-color);
   transition: background-color 160ms ease;
+  /* background-image: url("https://cdn.jsdelivr.net/npm/feather-icons@4.29.2/dist/icons/search.svg");
+  background-size: 1.1rem 1.1rem;
+  background-position: center center;
+  background-repeat: no-repeat; */
   cursor: pointer;
 }
 #header .primary > li.search span.actions > input[type=submit]:hover {
@@ -691,8 +692,7 @@ nav#greeting ul.user {
   border-radius: 3px;
   padding: 0.2em 0.5em;
   height: 0.75rem;
-  left: 1rem;
-  top: calc(var(--search-input-height) + 0.175rem);
+  left: 1.5rem;
   text-align: left;
 }
 
@@ -825,17 +825,18 @@ div.comment fieldset h4.heading {
   box-shadow: 0 2px 5px 0 var(--current-color-dim);
   cursor: pointer;
 }
-#main.works-search input[type=submit][value=Search] {
+#main.works-search input[type=submit] {
   font-size: 1rem;
   padding: 0.5rem 2rem 0.5rem 3.5rem;
   margin: 0;
   border-radius: 99px;
 }
-#main.works-search .submit {
-  position: relative;
+#main.works-search p.submit {
+  /* position: absolute;
+  right: 0; */
   padding: 0;
 }
-#main.works-search .submit:after {
+#main.works-search p.submit::before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -843,14 +844,16 @@ div.comment fieldset h4.heading {
   height: 1.2rem;
   top: 23%;
   right: 5.8rem;
-  background-color: var(--current-color);
-  mask: url("https://cdn.jsdelivr.net/gh/feathericons/feather@master/icons/search.svg") center/contain no-repeat;
-  -webkit-mask: url("https://cdn.jsdelivr.net/gh/feathericons/feather@master/icons/search.svg") center/contain no-repeat;
-  pointer-events: none;
+  background-image: url("https://cdn.jsdelivr.net/gh/feathericons/feather@master/icons/search.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1.1rem 1.1rem;
+  filter: var(--icon-filter);
+  z-index: 1;
   cursor: pointer;
 }
-#main.works-search .submit:has(input[type=submit]:hover)::after {
-  background-color: var(--background-current);
+#main.works-search p.submit:has(input:hover)::before {
+  filter: brightness(0) invert(0.93);
 }
 
 /* form layout */
@@ -1101,7 +1104,6 @@ dl.stats dt:not(:first-of-type) {
 /*** admin post **/
 #main.admin_posts-index ul.navigation.actions {
   flex-direction: column;
-  justify-items: flex-end;
   align-items: flex-end;
 }
 
@@ -1110,15 +1112,7 @@ dl.stats dt:not(:first-of-type) {
 }
 
 .admin .primary .icon {
-  --sprite-scale: 1;
-  --sprite-width: 200px;
-  --sprite-height: 835px;
-  width: calc(100px * var(--sprite-scale));
-  height: calc(100px * var(--sprite-scale));
   background-image: url(/images/imageset.png);
-  /* background-repeat: no-repeat; */
-  background-size: calc(var(--sprite-width) * var(--sprite-scale)) calc(var(--sprite-height) * var(--sprite-scale));
-  background-position: calc(100px * var(--sprite-scale)) calc(-75px * var(--sprite-scale));
   border-radius: 1rem;
 }
 
