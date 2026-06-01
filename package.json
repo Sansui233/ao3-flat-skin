@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/Home _ Archive of Our Own.html",
   "scripts": {
+    "build": "node scripts/build.mjs",
     "serve": "node scripts/live-server.mjs",
     "scss:build": "sass --no-source-map scss/index.scss src/skins/base.css",
     "scss:watch": "sass --watch --no-source-map scss/index.scss:src/skins/base.css",

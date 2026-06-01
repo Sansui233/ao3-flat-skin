@@ -841,9 +841,9 @@ div.comment fieldset h4.heading {
         top: 23%;
         right: 5.8rem;
         background-color: var(--current-color);
-        mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg")
+        mask: url("https://cdn.jsdelivr.net/gh/feathericons/feather@master/icons/search.svg")
             center / contain no-repeat;
-        -webkit-mask: url("https://raw.githubusercontent.com/feathericons/feather/master/icons/search.svg")
+        -webkit-mask: url("https://cdn.jsdelivr.net/gh/feathericons/feather@master/icons/search.svg")
             center / contain no-repeat;
         pointer-events: none;
         cursor: pointer;
@@ -1126,7 +1126,6 @@ dl.stats {
 
 .admin .primary .icon {
     --sprite-scale: 1;
-    /* background: url(/images/imageset.png) 100px -75px; */
     --sprite-width: 200px;
     --sprite-height: 835px;
     width: calc(100px * var(--sprite-scale));

@@ -4,9 +4,11 @@
 // Keep one theme import active, then run `pnpm run scss:build`
 // or keep `pnpm run dev` running.
 
-/* @use "theme-blue"; */
-@use "theme-red";
-// @use "theme-gray";
+/* Theme swithcer */
+// @use "theme-blue";
+@use "theme-bilipink";
+
+/* lang(optional) */
 @use "lang-cn";
 
 @use "base";
