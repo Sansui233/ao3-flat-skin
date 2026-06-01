@@ -36,10 +36,9 @@
   --tag-font-size: 0.875rem;
 }
 
-#proxy-notice {
-  display: none;
-}
-
+/* #proxy-notice {
+    display: none;
+} */
 /**********/
 /** Font **/
 /**********/

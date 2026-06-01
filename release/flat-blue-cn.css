@@ -42,10 +42,9 @@
   --user-letter-spacing: 0.04em;
 }
 
-#proxy-notice {
-  display: none;
-}
-
+/* #proxy-notice {
+    display: none;
+} */
 /**********/
 /** Font **/
 /**********/
